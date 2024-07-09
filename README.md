@@ -10,9 +10,9 @@ Checky has been written in Python 3. It is completely free and open-source. it r
 3. Delete history
 4. Exit
 
-# Using Checky from the terminal
+# Using Checky from the terminal (not implemented in normal install)
 Checky can be used from the terminal as well.
-USAGE: checky [file path] [checksum type] [checksum provided by creators] OR check
+USAGE: checky [file path] [checksum type] [checksum provided by creators] OR checky
 
 # license
 Checky is distributed under a license named after itself- Checky license...
