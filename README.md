@@ -2,7 +2,7 @@
 Checky can be used to get the checksum of a file, and then compare it with the checksum given by the creators. Open Checky, enter the file path, the type of checksum and the checksum given by the creators. Checky will compare the checksums and output whether the file has been damaged or not. It will save the result to a file along with the date of use, file path and other details.
 
 # design behind the app
-Checky has been written in Python 3. It is completely free and open-source. it runs on the user's computer.
+Checky has been written in Python 3. It is completely free and open-source. it runs on the user's computer. It uses a CSV file to store user history.
  
 # options
 1. Compare checksums
