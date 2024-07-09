@@ -37,7 +37,6 @@ def main():
 		print("\n\n")
 		main()		
 	elif opt == 4:
-		#db.close()
 		exit()
 	else:
 		print("Wrong option. Try again!")

@@ -1,24 +1,30 @@
-import sqlite3
 from datetime import datetime
-
-db = sqlite3.connect("db")
-cur = db.cursor()
+import csv
+from tabulate import tabulate
+from os import get_terminal_size
 
 def savetodb(record):
-	#table creation command: CREATE TABLE checksums (id INTEGER PRIMARY KEY AUTOINCREMENT, date DATE, file VARCHAR(255), hash VARCHAR(12), original_checksum VARCHAR(60), file_checksum VARCHAR(60), result VARCHAR(30));
 	date = datetime.now().strftime("%Y-%m-%d")
 	record.insert(0, date)
-	cur.execute("INSERT INTO checksums (date, file, hash, original_checksum, file_checksum, result) VALUES(?, ?, ?, ?, ?, ?)", (record[0], record[1], record[2], record[3], record[4], record[5]))
+	with open("history.csv", "a", newline="") as ff:
+		ff.seek(2)
+		writer = csv.writer(ff)
+		writer.writerow(record)
 	record.clear()
-	db.commit()
 
 
 def gethist():
-	hist = cur.execute("SELECT * FROM checksums")
-	record = hist.fetchall()
-	for k in record:	print(k)
+	headers = ["Date", "File", "Checksum type", "Checksum", "Checksum of file", "Result"]
+	width = int(get_terminal_size()[0]/6)
+	with open("history.csv", "r") as ff:
+		record = csv.reader(ff)
+		try:
+			print(tabulate(record, headers, tablefmt="grid", maxcolwidths=width))
+		except IndexError:
+			print("No history!")
 
 
 def delhist():
-	cur.execute("DELETE FROM checksums")
-	db.commit()
+	with open("history.csv", "a") as ff:
+		ff.seek(0)
+		ff.truncate()
